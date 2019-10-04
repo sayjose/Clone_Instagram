@@ -1,0 +1,120 @@
+<html>
+  <head>
+      <title>
+        KUstagram
+      </title>
+      <link rel="stylesheet" href="css/style.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="header">
+        <div class="header-container">
+          <div class="header-logo">
+            <img src="img/kustagram_logo.png" />
+          </div>
+          <div class="header-search">
+            <input type="text" placeholder="검색하세요" />
+          </div>
+          <div class="header-setting">
+            <%=username%>
+            <input type="button" onclick="location.href='/logout'" value="로그아웃" />
+          </div>
+        </div>
+      </div>
+
+      <div class="content-upload-container">
+        <form action="/upload" method="post" enctype="multipart/form-data" style="text-align: center;">
+          <textarea name="write_text" class="write-text-area" id="content" placeholder="내용을 입력해주세요"></textarea>
+          <input type="file" id="getfile" name="userfile">
+          <input type="submit" class="homework-submit-btn" value="작성"/>
+        </form>
+      </div>
+
+      <div class="main-body">
+        <% for (var i=0;i<posts.length;i++) { %>
+        <div class="post">
+          <div class="post-header">
+              <img src="img/profile.jpg" />
+              <div class="author-id">
+                <%=posts[i].user_id%>
+              </div>
+              <div class="post-reg-time">
+                <%=posts[i].reg_date%>
+              </div>
+          </div>
+          <div class="post-body" style="text-align:center;">
+            <img src="img/uploads/<%=posts[i].img_src%>" />
+            <span><%=posts[i].content%></span>
+            <% if(posts[i].user_id==username) { %>
+            <div>
+              <input type="button" class="post-delete-btn" value="삭제"
+                      data-idx="<%=posts[i].idx%>" data-filename="<%=posts[i].img_src%>" />
+            </div>
+            <% } %>
+          </div>
+          <div class="post-footer">
+            <div class="num-of-comment">
+              댓글 20개
+            </div>
+            <div class="comment-list">
+              <div class="each-comment">
+                <div class="userId">
+                  Mark
+                </div>
+                <div class="comment">
+                  I like this
+                </div>
+              </div>
+              <div class="each-comment">
+                <div class="userId">
+                  Kong
+                </div>
+                <div class="comment">
+                  Good!Good!
+                </div>
+              </div>
+              <div class="each-comment">
+                <div class="userId">
+                  Jessie
+                </div>
+                <div class="comment">
+                  This is amazing!
+                </div>
+              </div>
+            </div>
+            <div class="comment-form">
+              <div class="comment-input">
+                <input type="text" />
+              </div>
+              <div class="comment-button">
+                댓글등록
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <div class="footer">
+        <div class="footer-container">
+  				<ul>
+  					<li>About US</li>
+  					<li>고려대학교 홈페이지</li>
+  					<li>WEB 기본 강의</li>
+  				</ul>
+  			</div>
+      </div>
+    </div>
+    <script>
+    $('.post-delete-btn').click(function(){
+      if(confirm("삭제하시겠습니까")){
+        var idx = $(this).data('idx');
+        var filename = $(this).data('filename');
+        location.href="/delete?idx="+idx+"&filename="+filename;
+      } else {
+        return;
+      }
+    });
+    </script>
+  </body>
+</html>

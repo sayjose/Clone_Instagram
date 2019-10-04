@@ -1,0 +1,47 @@
+<html>
+  <head>
+      <title>
+        로그인
+      </title>
+      <link rel="stylesheet" href="css/style.css" />
+      <script src="js/jquery-3.2.0.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="main-body">
+        <div class="container">
+          <form class="login-form" action="/login" method="post">
+            <img alt="" src="img/kustagram_logo.png" style="width: 100%;"/>
+            <div class="input-group">
+              <div class="input-label">아이디 :</div>
+              <input class="login_id" type="text" name="username" />
+            </div>
+            <div class="input-group">
+              <div class="input-label">비밀번호 :</div>
+              <input class="login_pw" type="password" name="password" />
+            </div>
+            <input class="submit-btn" type="button" onclick="check();" value="로그인"/>
+            <input class="register-btn" type="button" onclick="location.href='/register'" value="회원가입"/>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      function check(){
+      var user_id = $('.login_id').val();
+      var user_password = $('.login_pw').val();
+      if(user_id!=""){
+        if(user_password!=""){
+          $('.login-form').submit();
+        } else {
+          alert('비밀번호를 입력해주세요');
+          return false;
+        }
+      } else {
+        alert('아이디를 입력해주세요');
+        return false;
+      }
+    }
+    </script>
+  </body>
+</html>

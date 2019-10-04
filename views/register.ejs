@@ -1,0 +1,49 @@
+<html>
+  <head>
+      <title>
+        회원가입
+      </title>
+      <link rel="stylesheet" href="css/style.css" />
+      <script src="js/jquery-3.2.0.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="main-body">
+        <div class="container">
+          <form class="login-form" action="/register_check" method="post">
+            <img alt="" src="img/kustagram_logo.png" style="width: 100%;"/>
+            <div class="input-group">
+              <div class="input-label">아이디 :</div>
+              <input class="reg_id" type="text" name="id" />
+            </div>
+            <div class="input-group">
+              <div class="input-label">비밀번호 :</div>
+              <input class="reg_pw" type="password" name="pw" />
+            </div>
+            <div class="input-group">
+              <div class="input-label">재입력 :</div>
+              <input class="reg_repw" type="password" name="repw" />
+            </div>
+            <input class="submit-btn" type="button" onclick="check();" value="회원가입"/>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+    function check(){
+      var user_id = $('.reg_id').val();
+      var password = $('.reg_pw').val();
+      var re_password = $('.reg_repw').val();
+      if(user_id=="" || password=="" || re_password==""){
+        alert('빈칸이 있습니다!');
+      } else {
+        if(password!=re_password){
+          alert('재입력 비밀번호를 확인해주세요');
+        } else {
+           $('.login-form').submit();
+        }
+      }
+    }
+    </script>
+  </body>
+</html>
